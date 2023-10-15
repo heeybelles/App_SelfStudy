@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/menu.css">
+     <link rel="stylesheet" href="css/music.css">
+      <link rel="stylesheet" href="css/crono.css">
+      <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Document</title>
+</head>
+<body>
+    <!---início do código do Menu--->
+    <header>
+        <nav class="nav-bar">
+         <div class="logo">
+           <img class="studylogo" src="img/menu/logobranca.png">
+         </div>
+
+         <div class="wrapper">
+            <div class="container">
+                
+                <img class="icon" src="img/menu/menu.png">
+                <div class="menulogo"></div>
+                 <div class="menulogo"></div>
+                  <div class="menulogo"></div>
+            </div>
+        </div>
+        </nav>
+    </header>
+    
+   
+        <ul class="menu">
+        
+              <li><a href="index.html">Início</a></li>
+             <li><a href="#">Humor</a></li>
+              <li><a href="#">Calendário</a></li>
+              <li><a href="#">Chat</a></li>
+              <li><a href="blocoNotas.html">Bloco de Notas</a></li>
+              <li><a href="#">Bateria</a></li>
+              <li><a href="crono.html">Cronômetro</a></li>
+              <li><a href="#">Meu Perfil</a></li>
+              <li><a href="sobre.html">Sobre</a></li>
+        </ul>
+        <!---fim do código do Menu--->
+        <br><br>
+      
+      <!-- Cronômetro-->
+    <center>
+<div class="div">
+<h1 class="title">Cronômetro</h1>
+</div>
+</center>
+
+<div class="timer-container">
+<div id="timer"> 00:00:00
+</div>
+</div>
+
+<center>
+   
+    <div class="main">
+ <audio id="music-player" autoplay="autoplay"></audio>
+           
+            <div class="player-controls">
+             
+                <p id="song-title">Calm-background</p>
+                <p id="song-artist"></p>
+<button id="prev-btn"><i class='bx bx-skip-previous bx-md' style='color:#005954'  ></i></button>
+<button id="play-btn"><i id="playicon" class='bx bx-play bx-md' style='color:#005954'  ></i></button>
+<button id="next-btn"><i class='bx bx-skip-next bx-md ' style='color:#005954' ></i></i></button>
+ <div class="song-details">
+   <br>
+              
+            </div>
+
+        
+            </div>
+            <div class="next-up">
+                <p>A seguir: <span id="song-next-up">Lorem ipsum dolor</span></p>
+            </div>
+        </div>
+    </div>
+   
+</center>
+<br>
+
+<div id="buttons">
+<button id="start" class="start"><center>Iniciar</center></button>
+<button id="pause" class="pause">Pausar</button>
+<button id="reset" class="reset">Zerar</button>
+</div>
+
+ 
+
+   
+
+ <div class="dados">
+<h4><b> Dados do cronômetro</b> </h4>
+<p id="elapsed-time">Tempo decorrido: 00:00:00</p>
+</div>
+<script>
+         let timer;
+        let isRunning = false;
+        let seconds = 0;
+        let minutes = 0;
+        let hours = 0;
+
+ 
+
+        const timerDisplay = document.getElementById("timer");
+        const startButton = document.getElementById("start");
+        const pauseButton = document.getElementById("pause");
+        const resetButton = document.getElementById("reset");
+        const elapsedTimeDisplay = document.getElementById("elapsed-time");
+
+ 
+
+        function startTimer() {
+            if (!isRunning) {
+                isRunning = true;
+                timer = setInterval(updateTimer, 1000);
+                startButton.disabled = true;
+                pauseButton.disabled = false;
+                resetButton.disabled = false;
+            }
+        }
+
+ 
+
+        function pauseTimer() {
+            if (isRunning) {
+                isRunning = false;
+                clearInterval(timer);
+                startButton.disabled = false;
+                pauseButton.disabled = true;
+            }
+        }
+
+ 
+
+        function resetTimer() {
+            if (isRunning) {
+                isRunning = false;
+                clearInterval(timer);
+                const elapsedTime = formatTime(hours, minutes, seconds);
+                elapsedTimeDisplay.textContent = "Tempo decorrido: " + elapsedTime;
+                elapsedTimeDisplay.style.display = "block";
+            }
+            seconds = 0;
+            minutes = 0;
+            hours = 0;
+            timerDisplay.textContent = "00:00:00";
+            startButton.disabled = false;
+            pauseButton.disabled = true;
+            resetButton.disabled = true;
+        }
+
+ 
+
+        function updateTimer() {
+            seconds++;
+            if (seconds == 60) {
+                seconds = 0;
+                minutes++;
+                if (minutes == 60) {
+                    minutes = 0;
+                    hours++;
+                }
+            }
+
+ 
+
+            timerDisplay.textContent = (hours < 10 ? "0" : "") + hours + ":" +
+                                      (minutes < 10 ? "0" : "") + minutes + ":" +
+                                      (seconds < 10 ? "0" : "") + seconds;
+        }
+
+ 
+
+        function formatTime(hours, minutes, seconds) {
+            return (
+                (hours < 10 ? "0" : "") + hours + ":" +
+                (minutes < 10 ? "0" : "") + minutes + ":" +
+                (seconds < 10 ? "0" : "") + seconds
+            );
+        }
+
+ 
+
+        startButton.addEventListener("click", startTimer);
+        pauseButton.addEventListener("click", pauseTimer);
+        resetButton.addEventListener("click", resetTimer);
+
+ 
+
+         </script>
+       <footer class="barra"></footer>
+    <script src="js/menuScript.js"></script>
+     <script src="js/musica.js"></script>
+       <style>
+          .barra{
+    background-color:#5dc1b9 ;
+    width: 100%;
+    height: 28px;
+    margin-top: 68px;
+     }
+       </style>
+
+ <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+</body>
+</html>
